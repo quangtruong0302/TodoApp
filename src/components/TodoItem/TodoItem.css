@@ -1,0 +1,23 @@
+.buton-isImportant button {
+    outline                  : none;
+    border                   : none;
+    background-color         : white;
+    display                  : flex;
+    justify-content          : center;
+    align-items              : center;
+    /* padding               : 10px; */
+
+}
+
+.buton-isImportant button i {
+    font-size: 14px;
+    color    : gold;
+}
+
+.todo-item {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+    cursor         : pointer;
+
+}

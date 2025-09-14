@@ -1,0 +1,89 @@
+.filter-panel input[type=text] {
+  width              : 100%;
+  border             : 0;
+  background-color   : #F0F0F0;
+  width              : 100%;
+  padding            : 15px;
+  border-radius      : 3px;
+  /* box-shadow      : rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+  margin-bottom      : 10px;
+  outline            : none;
+  font-size          : 14px;
+}
+
+.count {
+  font-size  : 20px;
+  font-weight: 500;
+}
+
+.filter-panel {
+  padding: 30px;
+}
+
+.grid-filter {
+  display              : grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows   : repeat(2, 1fr);
+  gap                  : 10px;
+
+}
+
+.filter-item i {
+  font-size: 20px;
+
+}
+
+.filter-item {
+  display        : flex;
+  justify-content: space-between;
+  align-items    : center;
+  cursor         : pointer;
+  padding        : 10px;
+  border-radius  : 8px;
+}
+
+.active-all {
+  background-color: #95afc0;
+  color           : white;
+}
+
+.active-completed {
+  background-color: rgb(46, 204, 113);
+  color           : white;
+}
+
+.active-important {
+  background-color: #f9ca24;
+  color           : white;
+}
+
+.active-deleted {
+  background-color: #e74c3c;
+  color           : white
+}
+
+.inactive {
+  background-color: #F0F0F0;
+}
+
+.item-title {
+  display       : flex;
+  flex-direction: column;
+  gap           : 10px;
+}
+
+.default-all {
+  color: black;
+}
+
+.default-completed {
+  color: rgb(46, 204, 113);
+}
+
+.default-important {
+  color: gold;
+}
+
+.default-deleted {
+  color: red
+}
