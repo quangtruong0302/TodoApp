@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { AppContext } from "../../contexts/AppContext.jsx";
+import { CATEGORY_ITEMS } from "../../constant.js";
 import "./sidebar.css";
 
-const Sidebar = ({ activeTodoItem, handleTodoItemChange, setShowSidebar }) => {
+const Sidebar = ({ activeTodoItem, setShowSidebar, handleTodoItemChange }) => {
   const [title, setTitle] = useState(activeTodoItem.title);
   const [isCompleted, setIsCompleted] = useState(activeTodoItem.isCompleted);
   const [isImportant, setIsImportant] = useState(activeTodoItem.isImportant);
+  const [category, setCategory] = useState(activeTodoItem.category);
 
   const sidebarRef = useRef(null);
-
-  // Lắng nghe click outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
@@ -22,7 +23,13 @@ const Sidebar = ({ activeTodoItem, handleTodoItemChange, setShowSidebar }) => {
   }, [setShowSidebar]);
 
   const handleSave = () => {
-    const newTodo = { ...activeTodoItem, title, isCompleted, isImportant };
+    const newTodo = {
+      ...activeTodoItem,
+      title,
+      isCompleted,
+      isImportant,
+      category,
+    };
     handleTodoItemChange(newTodo);
   };
 
@@ -60,6 +67,25 @@ const Sidebar = ({ activeTodoItem, handleTodoItemChange, setShowSidebar }) => {
             checked={isCompleted}
             onChange={() => setIsCompleted(!isCompleted)}
           />
+        </div>
+        <div className="checkbox-group">
+          <label htmlFor="category">Chủ đề</label>
+          <select
+            name="category"
+            id="category"
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+          >
+            {CATEGORY_ITEMS.map((item) => {
+              return (
+                <option value={item.id} key={item.id}>
+                  {item.label}
+                </option>
+              );
+            })}
+          </select>
         </div>
       </form>
 

@@ -1,65 +1,27 @@
-import React, { useMemo } from "react";
-import CategoryList from "../CategoryList/CategoryList";
+import React, { useMemo, useContext } from "react";
+import CategoryList from "./CategoryList/CategoryList";
+import { AppContext } from "../../contexts/AppContext";
+import { FILTER_ITEMS } from "../../constant.js";
 import "./FilterPanel.css";
 
-const FILTER_ITEMS = [
-  {
-    id: "all",
-    label: "Tất cả",
-    iconClass: "fa-solid fa-border-all",
-  },
-  {
-    id: "completed",
-    label: "Đã hoàn thành",
-    iconPath: "./public/images/completed.png",
-    iconClass: "fa-solid fa-circle-check",
-  },
-  {
-    id: "important",
-    label: "Quan trọng",
-    iconClass: "fa-solid fa-flag",
-  },
-  {
-    id: "deleted",
-    label: "Đã xóa",
-    iconClass: "fa-solid fa-trash",
-  },
-];
-const FilterPanel = ({
-  selectedFilterId,
-  setSelectedFilterId,
-  todoList,
-  searchText,
-  setSearchText,
-}) => {
-  // const countByFilterType = todoList.reduce(
-  //   (acc, current) => {
-  //     let newAcc = { ...acc };
-  //     if (current.isCompleted) {
-  //       newAcc = { ...acc, completed: acc.completed + 1 };
-  //     }
-  //     if (current.isImportant) {
-  //       newAcc = { ...acc, important: acc.important + 1 };
-  //     }
-  //     if (current.isDeleted) {
-  //       newAcc = { ...acc, deleted: acc.deleted + 1 };
-  //     }
-  //     return newAcc;
-  //   },
-  //   {
-  //     all: todoList.length,
-  //     important: 0,
-  //     completed: 0,
-  //     deleted: 0,
-  //   }
-  // );
+const FilterPanel = () => {
+  const {
+    selectedFilterId,
+    setSelectedFilterId,
+    todoList,
+    searchText,
+    setSearchText,
+  } = useContext(AppContext);
   const countByFilterType = useMemo(() => {
     return todoList.reduce(
       (acc, current) => {
-        if (current.isCompleted) {
+        if (!current.isDeleted) {
+          acc.all++;
+        }
+        if (current.isCompleted && !current.isDeleted) {
           acc.completed++;
         }
-        if (current.isImportant) {
+        if (current.isImportant && !current.isDeleted) {
           acc.important++;
         }
         if (current.isDeleted) {
@@ -68,14 +30,13 @@ const FilterPanel = ({
         return acc;
       },
       {
-        all: todoList.length,
+        all: 0,
         important: 0,
         completed: 0,
         deleted: 0,
       }
     );
   }, [todoList]);
-  console.log(countByFilterType);
   return (
     <div className="filter-panel">
       <input

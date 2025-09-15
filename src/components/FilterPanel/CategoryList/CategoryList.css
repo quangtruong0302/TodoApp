@@ -21,3 +21,8 @@
   background-color: #F0F0F0;
 
 }
+
+.active-category {
+  background-color: #95afc0;
+  color           : white;
+}

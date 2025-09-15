@@ -1,17 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AppContext } from "../../contexts/AppContext";
 import "./TodoItem.css";
 
-const TodoItem = ({
-  id,
-  value,
-  isImportant,
-  isCompleted,
-  // handleCompleteCheckboxChange,
-  handleTodoItemClick,
-}) => {
-  // const handleClick = () => {
-  //   alert(value);
-  // };
+const TodoItem = ({ id, value, isImportant, isCompleted }) => {
+  const { handleTodoItemClick } = useContext(AppContext);
   return (
     <div className="todo-item" onClick={() => handleTodoItemClick(id)}>
       <div
@@ -22,11 +14,6 @@ const TodoItem = ({
           gap: "5px",
         }}
       >
-        {/* <input
-          type="checkbox"
-          checked={isCompleted}
-          onChange={() => handleCompleteCheckboxChange(id)}
-        /> */}
         {isCompleted ? (
           <div style={{ color: "#2ecc71" }}>
             <i className="fa-regular fa-circle-check"></i>
